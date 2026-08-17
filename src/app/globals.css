@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: #0e0b18;
+  /* Cahaya lampu taman di kejauhan: dua sumber hangat yang sangat samar. */
+  background-image:
+    radial-gradient(1100px 620px at 12% -8%, rgba(198, 161, 91, 0.16), transparent 62%),
+    radial-gradient(900px 520px at 92% 4%, rgba(142, 59, 74, 0.13), transparent 60%),
+    linear-gradient(180deg, #191527 0%, #0e0b18 58%, #0b0914 100%);
+  background-attachment: fixed;
+  color: #efe9dd;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---------- Komponen berulang ---------- */
+
+@layer components {
+  .eyebrow {
+    @apply font-mono text-[10px] uppercase tracking-eyebrow text-brass-dim;
+  }
+
+  .card-night {
+    @apply rounded-2xl border border-night-line/80 bg-night-soft/60 backdrop-blur-sm;
+  }
+
+  /* Kartu undangan: permukaan kertas gading yang jadi ciri khas aplikasi ini. */
+  .paper {
+    position: relative;
+    background-color: #f7f1e6;
+    background-image:
+      radial-gradient(120% 90% at 50% 0%, rgba(255, 255, 255, 0.85), transparent 60%),
+      repeating-linear-gradient(
+        0deg,
+        rgba(42, 36, 24, 0.022) 0px,
+        rgba(42, 36, 24, 0.022) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+    color: #2a2418;
+  }
+
+  .paper-frame::before {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(198, 161, 91, 0.55);
+    border-radius: 10px;
+    pointer-events: none;
+  }
+
+  .btn {
+    @apply inline-flex select-none items-center justify-center gap-2 rounded-xl px-4 py-3
+           font-sans text-sm font-medium transition
+           focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+           focus-visible:outline-brass-light disabled:cursor-not-allowed disabled:opacity-40;
+  }
+
+  .btn-brass {
+    @apply btn bg-brass text-night-deep hover:bg-brass-light active:scale-[0.99];
+  }
+
+  .btn-ghost {
+    @apply btn border border-night-line text-paper-dim hover:border-brass-dim hover:text-brass-light;
+  }
+
+  .btn-paper {
+    @apply btn border border-paper-line bg-transparent text-paper-ink hover:bg-paper-dim;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-night-line bg-night-deep/70 px-4 py-3
+           font-sans text-[15px] text-paper placeholder:text-paper-mute
+           focus:border-brass-dim focus:outline-none;
+  }
+
+  .chip {
+    @apply rounded-full border px-3 py-1.5 font-sans text-xs transition;
+  }
+}
+
+/* Garis pemindai yang berjalan di dalam kotak kamera. */
+.scan-line {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(227, 203, 146, 0.9) 15%,
+    rgba(227, 203, 146, 0.9) 85%,
+    transparent
+  );
+  box-shadow: 0 0 14px rgba(198, 161, 91, 0.7);
+}
+
+/* html5-qrcode menyuntikkan <video> sendiri; paksa isi penuh kotaknya. */
+#qr-reader,
+#qr-reader > div,
+#qr-reader__scan_region,
+#qr-reader video,
+#qr-reader canvas {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  border-radius: 0 !important;
+  border: 0 !important;
+}
+
+#qr-reader img[alt="Info icon"],
+#qr-reader__dashboard_section_csr span,
+#qr-reader__status_span {
+  display: none !important;
+}
+
+::selection {
+  background: rgba(198, 161, 91, 0.35);
+}
+
+/* Scrollbar tipis di desktop */
+@media (min-width: 768px) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #332b48 transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Cetak: khusus lembar kartu QR ---------- */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-sheet {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6mm !important;
+  }
+
+  .print-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border: 1px solid #c9b688 !important;
+    background: #ffffff !important;
+    color: #2a2418 !important;
+  }
+}
