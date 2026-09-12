@@ -19,7 +19,8 @@ function secret(): string {
 
 function toBase64Url(bytes: Uint8Array): string {
   let binary = "";
-  for (const byte of bytes) binary += String.fromCharCode(byte);
+  // loop indeks, bukan for-of: aman walau tsconfig target-nya es5 (build Vercel)
+  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
   return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
 }
 

@@ -62,7 +62,9 @@ export async function POST(request: Request) {
     cleaned.set(phone, { name: name.slice(0, 120), phone });
   });
 
-  const payload = Array.from(cleaned.values());
+  // forEach, bukan Array.from(map.values()): iterator butuh downlevelIteration di target es5
+  const payload: { name: string; phone: string }[] = [];
+  cleaned.forEach((row) => payload.push(row));
   if (payload.length === 0) {
     return NextResponse.json({
       inserted: 0,
