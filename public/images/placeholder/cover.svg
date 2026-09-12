@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1400" viewBox="0 0 1000 1400">
+  <rect width="1000" height="1400" fill="#151516"/>
+  <rect x="50" y="50" width="900" height="1300" fill="none" stroke="#c9a24a" stroke-width="1.5" opacity="0.5"/>
+  <text x="500" y="700" font-family="Georgia, serif" font-size="46" fill="#c9a24a" text-anchor="middle" opacity="0.8">Foto Sampul</text>
+  <text x="500" y="750" font-family="Georgia, serif" font-size="22" fill="#8a8371" text-anchor="middle">placeholder</text>
+</svg>

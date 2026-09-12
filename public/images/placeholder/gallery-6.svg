@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000">
+  <rect width="800" height="1000" fill="#d9d5cc"/>
+  <rect x="40" y="40" width="720" height="920" fill="none" stroke="#b8b2a3" stroke-width="2"/>
+  <text x="400" y="480" font-family="Georgia, serif" font-size="42" fill="#8a8371" text-anchor="middle">Foto 6</text>
+  <text x="400" y="530" font-family="Georgia, serif" font-size="20" fill="#a29c8b" text-anchor="middle">placeholder</text>
+</svg>

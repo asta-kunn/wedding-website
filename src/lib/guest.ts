@@ -3,6 +3,7 @@ export type GiftType = "amplop" | "transfer" | "tidak_ada";
 export type Guest = {
   id: string;
   code: string;
+  slug: string;
   name: string;
   phone: string;
   attended: boolean;

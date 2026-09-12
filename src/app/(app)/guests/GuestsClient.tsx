@@ -110,6 +110,12 @@ export default function GuestsClient() {
     }
   }
 
+  function shareInvitation(guest: Guest) {
+    const link = `${window.location.origin}/to/${guest.slug}`;
+    const message = `Assalamu'alaikum/Halo ${guest.name}, berikut undangan pernikahan kami. Mohon doa restu dan kehadirannya ya 🙏\n\n${link}`;
+    window.open(`${waLink(guest.phone)}?text=${encodeURIComponent(message)}`, "_blank");
+  }
+
   async function removeGuest(guest: Guest) {
     const yes = window.confirm(
       `Hapus ${guest.name} (${guest.code}) dari daftar? Tindakan ini tidak bisa dibatalkan, dan kartu QR yang sudah dicetak jadi tidak berlaku.`
@@ -292,6 +298,14 @@ export default function GuestsClient() {
                     </span>
 
                     <div className="flex gap-2">
+                      {guest.slug ? (
+                        <button
+                          onClick={() => shareInvitation(guest)}
+                          className="text-[11px] text-paper-mute underline hover:text-leaf"
+                        >
+                          bagikan WA
+                        </button>
+                      ) : null}
                       {guest.attended ? (
                         <button
                           onClick={() => resetAttendance(guest)}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000">
+  <rect width="800" height="1000" fill="#e7e2d6"/>
+  <circle cx="400" cy="400" r="180" fill="#cfc8b6"/>
+  <text x="400" y="700" font-family="Georgia, serif" font-size="32" fill="#8a8371" text-anchor="middle">Foto Mempelai</text>
+  <text x="400" y="740" font-family="Georgia, serif" font-size="18" fill="#a29c8b" text-anchor="middle">placeholder</text>
+</svg>

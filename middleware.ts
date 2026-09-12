@@ -1,7 +1,9 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { SESSION_COOKIE, verifySessionToken } from "@/lib/auth";
 
-const PUBLIC_PATHS = ["/login", "/api/auth/login"];
+// /to adalah undangan digital yang dikirim ke tamu lewat WhatsApp — harus publik,
+// tidak boleh kena proteksi sesi admin.
+const PUBLIC_PATHS = ["/login", "/api/auth/login", "/to", "/api/rsvp"];
 
 export async function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl;

@@ -27,3 +27,18 @@ export function getDb(): SupabaseClient {
   });
   return client;
 }
+
+export type PublicGuest = { name: string; pax: number | null; code: string };
+
+/**
+ * Dipakai oleh halaman undangan publik (/to/[slug]). Hanya mengambil kolom
+ * yang boleh dilihat tamu — tanpa nomor HP, status kehadiran, atau hadiah.
+ */
+export async function getPublicGuestBySlug(slug: string): Promise<PublicGuest | null> {
+  const { data } = await getDb()
+    .from("guests")
+    .select("name, pax, code")
+    .eq("slug", slug)
+    .maybeSingle();
+  return (data as PublicGuest | null) ?? null;
+}

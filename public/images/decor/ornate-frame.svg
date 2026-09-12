@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <rect x="4" y="4" width="112" height="112" rx="3" fill="none" stroke="#f5efe4" stroke-width="8" />
+  <rect x="12" y="12" width="96" height="96" rx="2" fill="none" stroke="#f5efe4" stroke-width="1.5" opacity="0.7" />
+  <!-- corner flourishes, repeated by border-image at each corner -->
+  <g stroke="#f5efe4" fill="none" stroke-width="1.4">
+    <path d="M4 26 C 4 14, 14 4, 26 4" stroke-width="2" />
+    <path d="M4 20 q10 2 10 -10" />
+    <path d="M20 4 q2 10 -10 10" />
+    <circle cx="14" cy="14" r="2.4" fill="#f5efe4" stroke="none" />
+  </g>
+  <g stroke="#f5efe4" fill="none" stroke-width="1.4" transform="translate(120,0) scale(-1,1)">
+    <path d="M4 26 C 4 14, 14 4, 26 4" stroke-width="2" />
+    <path d="M4 20 q10 2 10 -10" />
+    <path d="M20 4 q2 10 -10 10" />
+    <circle cx="14" cy="14" r="2.4" fill="#f5efe4" stroke="none" />
+  </g>
+  <g stroke="#f5efe4" fill="none" stroke-width="1.4" transform="translate(0,120) scale(1,-1)">
+    <path d="M4 26 C 4 14, 14 4, 26 4" stroke-width="2" />
+    <path d="M4 20 q10 2 10 -10" />
+    <path d="M20 4 q2 10 -10 10" />
+    <circle cx="14" cy="14" r="2.4" fill="#f5efe4" stroke="none" />
+  </g>
+  <g stroke="#f5efe4" fill="none" stroke-width="1.4" transform="translate(120,120) scale(-1,-1)">
+    <path d="M4 26 C 4 14, 14 4, 26 4" stroke-width="2" />
+    <path d="M4 20 q10 2 10 -10" />
+    <path d="M20 4 q2 10 -10 10" />
+    <circle cx="14" cy="14" r="2.4" fill="#f5efe4" stroke="none" />
+  </g>
+</svg>

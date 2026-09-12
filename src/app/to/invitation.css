@@ -1,0 +1,230 @@
+/* Palet undangan — semua warna sebagai CSS variable, dua preset.
+   Preset aktif dipilih lewat data-theme di src/config/theme.ts. */
+
+[data-theme="monochrome"] {
+  --inv-bg: #0b0b0c;
+  --inv-bg-soft: #17171a;
+  --inv-ink: #f3f1ea;
+  --inv-ink-mute: #a8a6a0;
+  --inv-accent: #c9a24a;
+  --inv-accent-soft: rgba(201, 162, 74, 0.16);
+  --inv-surface: #f8f6f0;
+  --inv-surface-ink: #17171a;
+  --inv-border: rgba(243, 241, 234, 0.14);
+}
+
+[data-theme="warm"] {
+  --inv-bg: #2c1c14;
+  --inv-bg-soft: #3c2a1e;
+  --inv-ink: #fbf3e7;
+  --inv-ink-mute: #d9c3ab;
+  --inv-accent: #cf9a4c;
+  --inv-accent-soft: rgba(207, 154, 76, 0.18);
+  --inv-surface: #fffaf1;
+  --inv-surface-ink: #3c2a1e;
+  --inv-border: rgba(251, 243, 231, 0.16);
+}
+
+[data-theme="vintage"] {
+  /* Disamakan dengan referensi jsambac.com/tema-19 */
+  --inv-bg: #26150b;
+  --inv-bg-soft: #332014;
+  --inv-ink: #f0eae0;
+  --inv-ink-mute: #c9b9a6;
+  --inv-accent: #acbad4;
+  --inv-accent-soft: rgba(172, 186, 212, 0.16);
+  --inv-surface: #f5efe4;
+  --inv-surface-ink: #33201a;
+  --inv-border: rgba(240, 234, 224, 0.16);
+  --inv-frame: #f5efe4;
+}
+
+.invitation-root {
+  background: var(--inv-bg);
+  color: var(--inv-ink);
+  font-family: var(--font-inv-body), system-ui, sans-serif;
+}
+
+.invitation-root .font-inv-display {
+  font-family: var(--font-inv-display), Georgia, serif;
+}
+
+.invitation-root .font-inv-script {
+  font-family: var(--font-inv-script), cursive;
+}
+
+.invitation-root .locked {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.invitation-root .eyebrow-inv {
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--inv-accent);
+}
+
+.invitation-root .btn-inv {
+  display: inline-block;
+  border-radius: 2px;
+  background: var(--inv-accent);
+  color: var(--inv-bg);
+  padding: 0.6rem 1.4rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  transition: opacity 150ms ease;
+}
+.invitation-root .btn-inv:hover {
+  opacity: 0.85;
+}
+
+.invitation-root .btn-inv-outline {
+  display: inline-block;
+  border-radius: 2px;
+  border: 1px solid var(--inv-accent);
+  color: var(--inv-accent);
+  padding: 0.6rem 1.4rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  background: transparent;
+}
+
+.invitation-root .input-inv {
+  width: 100%;
+  border: 1px solid var(--inv-border);
+  background: transparent;
+  color: var(--inv-ink);
+  border-radius: 2px;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.9rem;
+}
+.invitation-root .input-inv::placeholder {
+  color: var(--inv-ink-mute);
+}
+.invitation-root .input-inv:focus {
+  outline: none;
+  border-color: var(--inv-accent);
+}
+
+.invitation-root .chip-inv {
+  flex: 1;
+  border: 1px solid var(--inv-border);
+  border-radius: 2px;
+  padding: 0.5rem 0.5rem;
+  font-size: 0.75rem;
+  color: var(--inv-ink-mute);
+  background: transparent;
+}
+.invitation-root .chip-inv-active {
+  border-color: var(--inv-accent);
+  color: var(--inv-accent);
+  background: var(--inv-accent-soft);
+}
+
+/* ── Animasi ────────────────────────────────────────────────────────────────
+   Perilaku, durasi, dan titik picu disalin dari tema-19
+   (css/animation-scroll.css + js/animation-scroll.js):
+     kekiri/kekanan  → geser masuk, 2.5s
+     naik/turun      → naik/turun dari luar layar, 2.5s
+     membesar        → scale(0) → scale(1), 2.5s
+     muncul          → opacity 0 → 1, 1.9s
+   Kelas .is-anim dipasang komponen Reveal saat elemen masuk 88% tinggi
+   layar (scrollY + innerHeight * 0.88), dan dilepas lagi kalau elemen
+   kembali berada di bawah layar — jadi animasinya main ulang saat discroll. */
+
+.invitation-root {
+  overflow-x: hidden;
+  overflow-x: clip; /* clip tidak ikut mengubah overflow-y seperti hidden */
+}
+
+.invitation-root [data-anim] {
+  transition-duration: 0.9s;
+  transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition-property: transform, opacity;
+  will-change: transform, opacity;
+  opacity: 0;
+}
+.invitation-root [data-anim="left"] {
+  transform: translateX(60px);
+}
+.invitation-root [data-anim="right"] {
+  transform: translateX(-60px);
+}
+.invitation-root [data-anim="up"] {
+  transform: translateY(48px);
+}
+.invitation-root [data-anim="down"] {
+  transform: translateY(-48px);
+}
+.invitation-root [data-anim="grow"] {
+  transform: scale(0.88);
+  opacity: 0;
+}
+.invitation-root [data-anim="fade"] {
+  opacity: 0;
+  transition-duration: 0.8s;
+}
+.invitation-root [data-anim].is-anim {
+  transform: none;
+  opacity: 1;
+}
+
+/* Animasi jalan terus — iddle9, swing, dan denyut angka countdown dari tema-19. */
+@keyframes inv-idle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+@keyframes inv-swing {
+  20% {
+    transform: rotate(15deg);
+  }
+  40% {
+    transform: rotate(-10deg);
+  }
+  60% {
+    transform: rotate(5deg);
+  }
+  80% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+@keyframes inv-counter {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.9);
+  }
+}
+
+.invitation-root .anim-idle {
+  animation: inv-idle 6s ease-in-out infinite;
+}
+.invitation-root .anim-swing {
+  transform-origin: top center;
+  animation: inv-swing 2.5s ease-in-out 1s both;
+}
+.invitation-root .anim-counter {
+  animation: inv-counter 1s infinite alternate-reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .invitation-root [data-anim],
+  .invitation-root .anim-idle,
+  .invitation-root .anim-swing,
+  .invitation-root .anim-counter {
+    transform: none;
+    opacity: 1;
+    animation: none;
+    transition: none;
+  }
+}
